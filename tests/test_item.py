@@ -31,3 +31,25 @@ def test_apply_discount(fixture_item):
     Item.pay_rate = 0.8
     item1.apply_discount()
     assert item1.price == 8000.0
+
+
+def test_name(fixture_item):
+    assert item1.name == 'Смартфон'
+    item1.name = 'Электроприбор'
+    assert item1.name == 'Электропри'
+
+
+def test_instantiate_from_csv():
+    Item.instantiate_from_csv('items.csv')
+    assert len(Item.all) == 5
+    assert Item.all[1].name == 'Ноутбук'
+    assert Item.all[2].price == 10
+    assert Item.all[4].quantity == 5
+
+
+def test_string_to_number():
+    """Тест для вспомогательного метода tring_to_number"""
+
+    assert Item.string_to_number('5') == 5
+    assert Item.string_to_number('5.0') == 5
+    assert Item.string_to_number('5.5') == 5
