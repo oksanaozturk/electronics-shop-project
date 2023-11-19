@@ -26,7 +26,12 @@ class Item:
         return self.__name
 
     @name.setter
-    def name(self, name: str):
+    def name(self, name: str) -> None:
+        """
+        Сеттер @property делает проверку имени на соответствие заданному параметру длины
+        :param name: Название товара.
+        """
+
         if len(name) < 10:
             self.__name = name
         else:
@@ -44,10 +49,14 @@ class Item:
         """
         Применяет установленную скидку для конкретного товара.
         """
-        self.price = self.price * self.pay_rate
+        self.price = self.price * Item.pay_rate
 
     @classmethod
     def instantiate_from_csv(cls, filename) -> None:
+        """
+        Kласс-метод, инициализирующий экземпляры класса `Item` данными из файла src/items.csv
+        :param filename from src/items.csv
+        """
         Item.all.clear()
         with open(filename, newline='', encoding='windows-1251') as csvfile:
             reader = csv.DictReader(csvfile)
@@ -59,4 +68,8 @@ class Item:
 
     @staticmethod
     def string_to_number(num_string: str) -> int:
+        """
+        Cтатический метод, возвращающий число из числа-строки
+        :param num_string: str (Ex: '5', '5.5', '5.0')
+        """
         return int(float(num_string))
