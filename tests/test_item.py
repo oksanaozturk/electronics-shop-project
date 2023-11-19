@@ -34,12 +34,16 @@ def test_apply_discount(fixture_item):
 
 
 def test_name(fixture_item):
+    """
+    Тест для Сеттер @property,который делает проверку имени на соответствие заданному параметру длины
+    """
     assert item1.name == 'Смартфон'
     item1.name = 'Электроприбор'
     assert item1.name == 'Электропри'
 
 
 def test_instantiate_from_csv():
+    """Тест для Kласс-метода, инициализирующий экземпляры класса `Item` данными из файла src/items.csv"""
     Item.instantiate_from_csv('items.csv')
     assert len(Item.all) == 5
     assert Item.all[1].name == 'Ноутбук'
