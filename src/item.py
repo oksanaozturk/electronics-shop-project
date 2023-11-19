@@ -55,6 +55,9 @@ class Item:
     def instantiate_from_csv(cls, filename) -> None:
         """
         Kласс-метод, инициализирующий экземпляры класса `Item` данными из файла src/items.csv
+
+        Перед созданием классов по данным из файла, строка all очищается через компнду clear()
+
         :param filename from src/items.csv
         """
         Item.all.clear()
