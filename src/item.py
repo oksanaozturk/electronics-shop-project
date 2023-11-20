@@ -1,4 +1,6 @@
 import csv
+import os
+os.path.join('..', 'src', 'items.csv')
 
 
 class Item:
@@ -36,6 +38,14 @@ class Item:
             self.__name = name
         else:
             self.__name = name[:10]
+
+    def __repr__(self):
+        """ Магический метод __repr__, выводит информацию для программистов"""
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        """Магический метод __str__, выводит информацию для пользователей"""
+        return f"{self.name}"
 
     def calculate_total_price(self) -> float:
         """
