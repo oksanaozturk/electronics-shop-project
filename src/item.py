@@ -86,3 +86,12 @@ class Item:
         :param num_string: str (Ex: '5', '5.5', '5.0')
         """
         return int(float(num_string))
+
+    def __add__(self, other) -> int:
+        """Метод, реализующий сложение экземпляров класса
+           (сложение по количеству товара в магазине)
+        """
+        if not isinstance(other, self.__class__):
+            raise ValueError("нельзя сложить `Phone` или `Item` с экземплярами не `Phone` или `Item` классов")
+        else:
+            return self.quantity + other.quantity

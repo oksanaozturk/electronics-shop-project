@@ -1,14 +1,6 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
-import pytest
 from src.item import Item
 import os
-
-
-@pytest.fixture
-def fixture_item():
-    """Фикстура для тестовых функций"""
-
-    return Item("Смартфон", 10000, 20)
 
 
 def test__init__(fixture_item):
@@ -60,8 +52,23 @@ def test_string_to_number():
 
 
 def test_repr(fixture_item):
+    """Тест для магического метода __repr__"""
     assert repr(fixture_item) == "Item('Смартфон', 10000, 20)"
 
 
 def test_str(fixture_item):
+    """Тест для магического метода __str__"""
     assert str(fixture_item) == 'Смартфон'
+
+
+def test_add(fixture_item, fixture_phone):
+    """Тест для метода, реализующего сложение экземпляров класса
+               (сложение по количеству товара в магазине)
+            """
+    item2 = Item('Ноутбук',1000,3)
+    assert fixture_item + item2 == 23
+    assert fixture_item + fixture_phone == 25
+
+
+
+
