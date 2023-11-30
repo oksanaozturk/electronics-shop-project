@@ -21,9 +21,9 @@ def test_number_of_sim(fixture_phone):
     fixture_phone.number_of_sim = 1
     assert fixture_phone.number_of_sim == 1
 
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="Количество физических SIM-карт должно быть целым числом больше нуля"):
         fixture_phone.number_of_sim = 0
-        assert str(fixture_phone.number_of_sim) == "Количество физических SIM-карт должно быть целым числом больше нуля"
+
 
 
 def test_add(fixture_phone):
