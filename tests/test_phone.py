@@ -25,10 +25,10 @@ def test_number_of_sim(fixture_phone):
         fixture_phone.number_of_sim = 0
 
 
-
 def test_add(fixture_phone):
-    """Тест для метода, реализующего сложение экземпляров класса
-               (сложение по количеству товара в магазине)
-            """
+    """
+    Тест для метода, реализующего сложение экземпляров класса
+    (сложение по количеству товара в магазине)
+    """
     phone2 = Phone("iPhone 13", 110000, 10, 2)
     assert fixture_phone + phone2 == 15
