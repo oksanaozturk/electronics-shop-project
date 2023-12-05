@@ -1,6 +1,7 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 import os
+import pytest
 
 
 def test__init__(fixture_item):
@@ -43,6 +44,18 @@ def test_instantiate_from_csv():
     assert Item.all[4].quantity == 5
 
 
+def test_instantiate_from_csv_raise_1():
+    """Тест для Kласс-метода instantiate_from_csv(), проверяющий возникновение ошибки при отсутсвии файла"""
+    with pytest.raises(FileNotFoundError, match="Отсутствует файл item.csv"):
+        Item.instantiate_from_csv(os.path.join('..', 'src', 'non.csv'))
+
+
+def test_instantiate_from_csv_raise_2():
+    """Тест для Kласс-метода instantiate_from_csv(), проверяющий возникновение ошибки при поломке данных в файле"""
+    with pytest.raises(InstantiateCSVError, match="Файл item.csv поврежден"):
+        Item.instantiate_from_csv(os.path.join('..', 'tests', 'test_items.csv'))
+
+
 def test_string_to_number():
     """Тест для вспомогательного метода tring_to_number"""
 
@@ -65,10 +78,6 @@ def test_add(fixture_item, fixture_phone):
     """Тест для метода, реализующего сложение экземпляров класса
                (сложение по количеству товара в магазине)
             """
-    item2 = Item('Ноутбук',1000,3)
+    item2 = Item('Ноутбук', 1000, 3)
     assert fixture_item + item2 == 23
     assert fixture_item + fixture_phone == 25
-
-
-
-
