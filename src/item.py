@@ -1,6 +1,6 @@
 import csv
 import os
-os.path.join('..', 'src', 'items.csv')
+csv_file = os.path.join('..', 'src', 'items.csv')
 
 
 class Item:
@@ -63,22 +63,29 @@ class Item:
         self.price = self.price * Item.pay_rate
 
     @classmethod
-    def instantiate_from_csv(cls, filename) -> None:
+    def instantiate_from_csv(cls, csv_file) -> None:
         """
         Kласс-метод, инициализирующий экземпляры класса `Item` данными из файла src/items.csv
 
         Перед созданием классов по данным из файла, строка all очищается через компнду clear()
 
-        :param filename from src/items.csv
+        :param csv_file from src/items.csv
         """
         Item.all.clear()
-        with open(filename, newline='', encoding='windows-1251') as csvfile:
-            reader = csv.DictReader(csvfile)
-            for row in reader:
-                name = row['name']
-                price = int(row['price'])
-                quantity = int(row['quantity'])
-                cls(name, price, quantity)
+        try:
+            with open(csv_file, newline='', encoding='windows-1251') as csvfile:
+                reader = list(csv.DictReader(csvfile))
+                for row in reader:
+                    name = row['name']
+                    price = int(row['price'])
+                    quantity = int(row['quantity'])
+                    cls(name, price, quantity)
+
+        except FileNotFoundError:
+            raise FileNotFoundError("Отсутствует файл item.csv")
+
+        except (KeyError, ValueError, TypeError):
+            raise InstantiateCSVError("Файл item.csv поврежден")
 
     @staticmethod
     def string_to_number(num_string: str) -> int:
@@ -96,3 +103,22 @@ class Item:
             raise ValueError("нельзя сложить `Phone` или `Item` с экземплярами не `Phone` или `Item` классов")
         else:
             return self.quantity + other.quantity
+
+
+class InstantiateCSVError(Exception):
+    """
+    Класс-исключение для обработки исключений при повреждении файла `items.csv`,
+    при котором будет прописываться ошибка “_Файл item.csv поврежден_”
+
+    """
+    pass
+    # Первый вариант инициализации
+    # def __init__(self, message='Файл item.csv поврежден'):
+    #     super().__init__()
+    #     self.message = message
+    # def __init__(self, *args):
+    #     self.message = args[0] if args else 'Файл item.csv поврежден'
+    #
+    # Второй вариант инициализации
+    # def __str__(self):
+    #     return f'{self.message}'
