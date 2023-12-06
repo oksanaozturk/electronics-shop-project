@@ -21,19 +21,19 @@ class MixinChange:
         """Созданием приватности для атрибута language"""
         return self.__language
 
-    def __str__(self) -> str:
-        """Магический метод __str__ дл яэкземпляров Класса"""
-        return self.__language
+    # def __str__(self) -> str:
+    #     """Магический метод __str__ дл яэкземпляров Класса"""
+    #     return self.__language
 
     def change_lang(self) -> str:
         """Метод для изменения языка клавиатуры"""
         if self.__language == self.language_1:
             self.__language = self.language_2
-            return self.language
+            return self.__language
 
         elif self.language == self.language_2:
             self.__language = self.language_1
-            return self.language
+            return self.__language
 
 
 class Keyboard(Item, MixinChange):
