@@ -39,11 +39,13 @@ class MixinChange:
 class Keyboard(Item, MixinChange):
     """Класс для товара “клавиатура”"""
 
-    def __init__(self, name: str, price: float, quantity: int) -> None:
-        """Инициализация экземпляров класса
+    pass
 
-           :param name: Название товара.
-           :param price: Цена за единицу товара.
-           :param quantity: Количество товара в магазине.
-        """
-        super().__init__(name, price, quantity)
+    # def __init__(self, name: str, price: float, quantity: int) -> None:
+    #     """Инициализация экземпляров класса
+    #
+    #        :param name: Название товара.
+    #        :param price: Цена за единицу товара.
+    #        :param quantity: Количество товара в магазине.
+    #     """
+    #     super().__init__(name, price, quantity)
